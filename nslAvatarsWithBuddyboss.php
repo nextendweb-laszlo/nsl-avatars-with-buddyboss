@@ -2,7 +2,7 @@
 /*
    Plugin Name: NSL Avatars for BuddyBoss
    description: This plugin can be used for storing the avatars of Nextend Social Login with the theme BuddyBoss.
-   Version: 1.0
+   Version: 1.1
    Author: Laszlo Szalvak
 */
 
@@ -20,6 +20,13 @@ class nslAvatarsWithBuddyboss {
 
 
     public function init() {
+        add_action('plugins_loaded', array(
+            $this,
+            'plugins_loaded'
+        ));
+    }
+
+    public function plugins_loaded() {
         if (class_exists('NextendSocialLogin', false) && NextendSocialLogin::$settings->get('avatar_store')) {
             add_action('nsl_update_avatar', array(
                 $this,
